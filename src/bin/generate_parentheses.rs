@@ -7,7 +7,7 @@ impl Solution {
         r.push(vec!["".to_owned()]);
         r.push(vec!["()".to_owned()]);
         for i in 2..=n {
-            let mut q: Vec<String> = Vec::new();
+            let mut q: Vec<String> = Vec::with_capacity(r.last().unwrap().len() * i);
             for j in 0..i {
                 for s in &r[j] {
                     for ss in &r[i - j - 1] {
@@ -15,6 +15,7 @@ impl Solution {
                     }
                 }
             }
+            q.shrink_to_fit();
             r.push(q);
         }
         r[n].clone()
